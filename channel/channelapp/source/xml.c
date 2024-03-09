@@ -36,11 +36,11 @@ static char *_get_cdata(mxml_node_t *node) {
 	if (!node)
 		return NULL;
 
-	mxml_node_t *n = node->child;
+	mxml_node_t *n = mxmlGetFirstChild(node);
 
 	while (n) {
-		if (n->type == MXML_OPAQUE)
-			return n->value.opaque;
+		if (mxmlGetType(n) == MXML_OPAQUE)
+			return (char *)mxmlGetOpaque(n);
 
 		n = mxmlWalkNext(n, node, MXML_NO_DESCEND);
 	}
